@@ -74,7 +74,23 @@ if uploaded_file is not None:
         st.metric("Giao Dịch Lớn Nhất", f"${max_val:,.2f}")
     with col4:
         st.metric("Trạng Thái Hệ Thống", "Sẵn sàng", delta="Ổn định")
+        st.header("1. Khám Phá Dữ Liệu")
+col1, col2 = st.columns(2)
+with col1:
+    st.subheader("Thông tin dữ liệu")
 
+    info_df = pd.DataFrame({
+        "Column": df.columns,
+        "Missing": df.isnull().sum(),
+        "Type": df.dtypes.astype(str)
+    })
+
+    st.dataframe(info_df)
+
+with col2:
+    st.subheader("Thống kê mô tả")
+
+    st.dataframe(df.describe())
     # --- TẠO TAB VỚI UI HIỆN ĐẠI ---
     tab1, tab2 = st.tabs(["📈 Phân Tích Xu Hướng", "🔍 Phát Hiện Bất Thường"])
 
